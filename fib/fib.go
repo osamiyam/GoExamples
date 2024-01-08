@@ -15,11 +15,17 @@ func fib(n int) int {
 }
 
 func main() {
-  m, err := strconv.Atoi(os.Args[1])
-  if err != nil {
-     fmt.Println("!", err)
-  }
-  for i := 0; i <= m; i++ {
-  	fmt.Println(i, fib(i))
+  args := os.Args
+  if len(args) < 2 {
+     fmt.Println("Usage: fib n")
+  } else {
+  	m, err := strconv.Atoi(os.Args[1])
+  	if err != nil {
+		fmt.Println("Error: ", err)
+	} else {
+  		for i := 0; i <= m; i++ {
+  			fmt.Println(i, fib(i))
+  		}
+	}
   }
 }
