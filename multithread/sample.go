@@ -38,16 +38,16 @@ func work3() {
 	fmt.Printf("fib(%d) = %d\n", fibN, res + <-ch) 
 }
 
+func measure_work(work func (), msg string) {
+	start := time.Now()
+	work()
+	fmt.Println(msg, time.Since(start))
+}
+
 func main() {
 	fmt.Printf("\n** Computing fib(%d) **\n\n", fibN)
-	start := time.Now()
-	work1()
-	fmt.Println("Two threads & main: ", time.Since(start))
-	start = time.Now()
-	work2()
-	fmt.Println("Single thread: ", time.Since(start))
-	start = time.Now()
-	work3()
-	fmt.Println("One thread & main: ", time.Since(start))
+	measure_work(work1, "Two threads & main: ")
+	measure_work(work2, "Single thread: ")
+	measure_work(work3, "One thread & main: ")
 	fmt.Println()
 }
