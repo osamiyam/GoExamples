@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const fibN = 38
+const fibN = 40
 
 func fibwork(n int, ch chan int) {
 	ch <- fib(n)

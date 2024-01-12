@@ -34,12 +34,14 @@ func day_of_week(y int) int {
 	return (num_of_days(y) + 1) % 7
 }
 
-var nmon = []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
-var header = "Su Mo Tu We Th Fr Sa"
-var mnames = []string{
-	"January", "February", "March", "April", "May", "June",
-	"July", "August", "September", "October", "November",
-	"December"}
+var (
+	nmon = []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+	header = "Su Mo Tu We Th Fr Sa"
+	mnames = []string{
+		"January", "February", "March", "April", "May", "June",
+		"July", "August", "September", "October", "November",
+		"December"}
+)
 
 func prcal(y int, m int) {
 	ss := 0
