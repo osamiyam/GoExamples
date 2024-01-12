@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	N = 100
+	N        = 100
 	nthreads = 10
 )
 
@@ -14,18 +14,15 @@ func producer(ch chan int) {
 	for i := 1; i <= N; i++ {
 		ch <- i
 	}
-	for i := 0; i < nthreads; i++ {
-		ch <- 0
-	}
-
+	close(ch)
 }
 
 func consumer(ch chan int, no int, wg *sync.WaitGroup) {
 	defer wg.Done()
-	data := [] int {}
+	data := []int{}
 	for {
-		i := <-ch
-		if i == 0 {
+		i, ok := <-ch
+		if !ok {
 			break
 		}
 		fmt.Printf("This is Process %d. I got %d.\n", no, i)
@@ -38,7 +35,8 @@ func main() {
 	var wg sync.WaitGroup
 	ch := make(chan int)
 	for i := 0; i < nthreads; i++ {
-		wg.Add(1); go consumer(ch, i, &wg)
+		wg.Add(1)
+		go consumer(ch, i, &wg)
 	}
 	producer(ch)
 	wg.Wait()
